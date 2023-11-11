@@ -6,6 +6,7 @@ function move(){
 		{
 			if(arr[j].id == "hero" && arr[j].xPos !=0)
 			{
+				
 				arr[j].xPos = arr[j].xPos - arr[j].xDelta;
 					
 				var ax = arr[j].left + arr[j].xDelta;

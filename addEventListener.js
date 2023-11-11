@@ -242,4 +242,16 @@ document.addEventListener('DOMContentLoaded', function(){
        
        
 
-    });
+    }
+    );
+
+
+    document.addEventListener('keydown', function (e){
+        var keyPressed = e.keyCode;
+            moveArr.push(keyPressed);
+    })
+   document.addEventListener('keyup', function(e){
+        var keyRelased = e.keyCode;
+
+        moveArr = moveArr.filter(key => key !== keyRelased);
+})
