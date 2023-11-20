@@ -40,15 +40,27 @@ class myObject {
        this.type = "Bullet";
        this.canMovebx = true;
        this.canMoveby = true;
-
        }
-   }
+       if(type == "other")
+       {
+        this.width = 100;
+        this.height = 100;
+        this.backgroundcolor = "black";
+        this.bottom = 100;
+        this.left = 100;
+        this.backgroundsize = "contain";
+        this.position = "absolute";
+        this.id = "";
+        }
+    }
    myRender() {
     
        let d=document.createElement('div');
        d.style.width = this.width + "px";
        d.style.height = this.height + "px";
        d.style.backgroundImage = this.backgroundimage;
+       d.style.background = this.background;
+       d.style.border = this.border;
        d.style.bottom = this.bottom + "px";
        d.style.left = this.left + "px";
        d.style.backgroundSize = this.backgroundsize;
@@ -74,16 +86,14 @@ class myObject {
 document.addEventListener('DOMContentLoaded', function()
 {
 
-    let border = document.createElement('div'); // граница за которую не заедут танки
-    border.style.backgroundColor = "black";
-    border.style.width = window.innerWidth - 80 + "px";
-    border.style.height = window.innerHeight - 80 + "px";
-    border.style.border = "1px solid white";
-    border.style.position = "center";
-    border.style.margin = "auto auto auto auto";
-    document.body.appendChild(border);
-    border.width = window.innerWidth - 80;
-    border.height = window.innerHeight - 80;
+    border = new myObject('other');
+    border.width = 1480;
+    border.height=700;
+    border.background="black";
+    border.border = "2px solid white";
+    border.left = 20;
+    border.bottom = 20;
+    arr.push(border);
 
 
     hero =  new myObject("hero");
