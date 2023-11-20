@@ -6,8 +6,8 @@ class myObject {
        this.width = 40;
        this.height = 40;
        this.backgroundimage = "url(./src/sprites/player-top.png)";
-       this.bottom = 102;
-       this.left = 40;
+       this.bottom = 204;
+       this.left = 80;
        this.backgroundsize = "contain";
        this.position = "absolute";
        this.id = "";
@@ -86,14 +86,7 @@ class myObject {
 document.addEventListener('DOMContentLoaded', function()
 {
 
-    border = new myObject('other');
-    border.width = 1480;
-    border.height=700;
-    border.background="black";
-    border.border = "2px solid white";
-    border.left = 20;
-    border.bottom = 20;
-    arr.push(border);
+
 
 
     hero =  new myObject("hero");
@@ -147,7 +140,7 @@ function checkMove()
 				hero_check.firstChild.style.transform = "rotate(" +  deg_for_hp + "deg)";
 				hero_check.firstChild.style.left = "-30px";
 				hero_check.firstChild.style.bottom = "-20px";
-			}
+			}	
 			if(moveArr[t]==39)
 			{
 
@@ -207,7 +200,9 @@ function move(){
 		{
 			if(arr[j].id == "hero" && arr[j].xPos !=0)
 			{
+				
 				arr[j].xPos = arr[j].xPos - arr[j].xDelta;
+					
 				var ax = arr[j].left + arr[j].xDelta;
 				var ax1 = arr[j].left + arr[j].xDelta + arr[j].width;
 				var ay = arr[j].bottom;
@@ -224,6 +219,11 @@ function move(){
 					var bx1 = arr[i].left + arr[i].width;
 					var by = arr[i].bottom;
 					var by1 = arr[i].bottom + arr[i].height;
+					
+					if(intersects(ax, ax1, ay, ay1, bx, bx1, by, by1)==true || ax < 20 || ax > 1440) {
+						arr[j].canMovex = false;
+						break;
+					}
 				};
 				if(arr[j].canMovex==true)
 				{		
@@ -231,6 +231,8 @@ function move(){
 					document.getElementById("hero").style.left = arr[j].left + "px";
 				}
 			}
+
+			// пуля
 			else if(arr[j].type == "Bullet" && arr[j].xPosb !=0 && arr[j].yPosb ==0)
 			{
 				arr[j].canMovebx = true;
@@ -246,7 +248,7 @@ function move(){
 					var by = arr[i].bottom;
 					var by1 = arr[i].bottom +arr[i].height;
 		
-					if(arr[i].type != "Bullet" && arr[i].type != "Kust" && intersects(ax, ax1, ay, ay1, bx, bx1, by, by1)==true)
+					if(arr[i].type != "Bullet" && intersects(ax, ax1, ay, ay1, bx, bx1, by, by1)==true)
 					{
 						if(arr[i].hp >=40 && arr[i].destroy == 1) // разрушаемость блоков от попаданий
 						{
@@ -308,17 +310,16 @@ function move(){
 			}
 		}
 
-		if(cd !=0)
-			{
-				cd -=4;// чтобы cd пришло к 0 и можно было выстрелить, взято из addEventLstener - attack 
-			}
+
 	}
+
 
 	function moveY() {
 		for(var j = 0; j < arr.length;j++) 
 		{
 			if(arr[j].id == "hero" && arr[j].yPos !=0)
 			{
+
 				arr[j].yPos = arr[j].yPos - arr[j].yDelta;
 		
 				var ax = arr[j].left;
@@ -337,6 +338,12 @@ function move(){
 					var bx1 = arr[i].left + arr[i].width;
 					var by = arr[i].bottom;
 					var by1 = arr[i].bottom + arr[i].height;
+
+					if(intersects(ax,ax1,ay,ay1,bx,bx1,by,by1)==true || ay < 60|| ay >  680)
+					{
+						arr[j].canMovey = false;
+						break;
+					}
 
 				}
 				if(arr[j].canMovey==true)
@@ -360,7 +367,7 @@ function move(){
 					var bx1 = arr[i].left+ arr[i].width;
 					var by = arr[i].bottom;
 					var by1 = arr[i].bottom +arr[i].height;
-					if(arr[i].type != "Bullet" && arr[i].type != "Kust" && intersects(ax, ax1, ay, ay1, bx, bx1, by, by1)==true)
+					if(arr[i].type != "Bullet" && intersects(ax, ax1, ay, ay1, bx, bx1, by, by1)==true )
 					{
 						if(arr[i].hp >=40 && arr[i].destroy == 1) // разрушаемость блоков от попаданий
 						{
@@ -421,6 +428,7 @@ function move(){
 		}
 	}
 }
+
 
 
 
